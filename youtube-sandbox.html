@@ -1,0 +1,138 @@
+<head>
+  <title>YouTube Sandbox</title>
+</head>
+
+<body>
+
+  {{> methodNav}}
+
+	<div class="container">
+
+    <div class="row">
+      <div class="col-xs-12 col-md-5">
+        {{> ytIframeApi}}
+        {{> ytPlayerTests}}
+      </div>
+      <div class="col-xs-12 col-md-7">{{> ytPlayer}}</div>
+    </div>
+
+	</div>
+
+</body>
+
+<template name="methodNav">
+
+  <nav class="navbar navbar-inverse" role="navigation">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="#">YouTube Sandbox</a>
+    </div>
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+
+        {{#if activeMethod 1}}
+          <li id="firstMethod" class="active">
+        {{else}}
+          <li id="firstMethod">
+        {{/if}}
+          <a href="#">Method 1</a>
+        </li>
+
+        {{#if activeMethod 2}}
+          <li id="secondMethod" class="active">
+        {{else}}
+          <li id="secondMethod">
+        {{/if}}
+          <a href="#">Method 2</a>
+        </li>
+
+        {{#if activeMethod 3}}
+          <li id="thirdMethod" class="active">
+        {{else}}
+          <li id="thirdMethod">
+        {{/if}}
+          <a href="#">Method 3</a>
+        </li>
+      </ul>
+    </div>
+
+  </nav>
+
+
+</template>
+
+<template name="ytIframeApi">
+
+  <h6>1. Test of asynchronously loading the YouTube Player API</h6>
+  {{#if apiReady}}
+    <div class="alert alert-success">
+      <strong>YouTube Iframe API has been loaded!</strong>
+    </div>
+  {{else}}
+    <div class="alert alert-danger">
+      <strong>YouTube Iframe API has not been loaded</strong>
+    </div>
+  {{/if}}
+
+</template>
+
+
+<template name="ytPlayerTests">
+
+  <h6>2. Test of the YouTube Player API Events upon initialization</h6>
+
+  {{#if playerReady}}
+    <div class="alert alert-success">
+      <strong>Video is ready! (onReady has been fired)</strong>
+    </div>
+  {{else}}
+    <div class="alert alert-danger">
+      <strong>Video waiting to be ready</strong>
+    </div>
+  {{/if}}
+  {{#if playerStateAvailable}}
+    <div class="alert alert-success">
+      <strong>Video informs of its state! (onStateChange has been fired)</strong>
+    </div>
+  {{else}}
+    <div class="alert alert-danger">
+      <strong>Waiting for video to inform of its state</strong>
+    </div>
+  {{/if}}
+
+</template>
+
+
+<template name="ytPlayer">
+
+  {{#if embedMethod 1}}
+    <div id="video-container">
+      <iframe id="youtube-video-player" type="text/html" width="640" height="390"
+        src="http://www.youtube.com/embed/cN2VJsiZlk0?controls=0&showinfo=0&disablekb=1&autoplay=0&modestbranding=1&rel=0&iv_load_policy=3&wmode=transparent&enablejsapi=1"
+        frameborder="0">
+      </iframe>
+    </div>
+  {{/if}}
+
+  {{#if embedMethod 2}}
+  <div id="video-container">
+    <iframe id="youtube-video-player" type="text/html" width="640" height="390"
+      src="https://www.youtube.com/embed/cN2VJsiZlk0?controls=0&showinfo=0&disablekb=1&autoplay=0&modestbranding=1&rel=0&iv_load_policy=3&wmode=transparent&enablejsapi=1"
+      frameborder="0">
+    </iframe>
+  </div>
+  {{/if}}
+
+  {{#if embedMethod 3}}
+    <div id="video-container"><p>Container for the all JavaScript embed implementation</p></div>
+  {{/if}}
+
+</template>
